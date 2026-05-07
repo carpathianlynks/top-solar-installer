@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Solar Installer Ops Platform: AI + Automations Case Study | TechQuarter</title>
+<meta name="description" content="How TechQuarter built a 3-module AI-powered platform for a top U.S. solar installer — automating utility applications, managing 580+ users, and monitoring 700+ active jobs in real time." />
+<meta property="og:title" content="Top U.S. Solar Installer Runs Smarter with AI | TechQuarter" />
+<meta property="og:description" content="See how a custom Sales Portal, utility automation engine, and AI Ops layer transformed project management for one of the largest residential solar installers in the U.S." />
+<meta property="og:type" content="article" />
+<meta name="keywords" content="solar installer software, utility automation, AI project management, dealer portal, solar operations platform, custom software development" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0a0a; --dark: #111111; --card: #161616; --border: #252525;
+    --border-light: #2e2e2e; --text: #e8e8e8; --muted: #888888;
+    --accent: #f5a623; --accent-dim: rgba(245,166,35,0.12); --white: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--black); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(10,10,10,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; }
+  .nav-logo { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); background: var(--card); border: 1px solid var(--border); padding: 5px 12px; border-radius: 3px; }
+  .nav-cta { font-size: 13px; font-weight: 600; color: var(--black); background: var(--accent); padding: 8px 20px; border-radius: 3px; text-decoration: none; }
+
+  .hero { padding-top: 64px; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; background: var(--black); position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(245,166,35,0.07) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 20% 80%, rgba(245,166,35,0.04) 0%, transparent 50%); pointer-events: none; }
+  .hero-grid { position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 75%); }
+  .hero-inner { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; width: 100%; padding: 80px 48px 72px; }
+  .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; animation: fadeUp 0.6s ease both; }
+  .eyebrow-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(245,166,35,0.3); padding: 5px 12px; border-radius: 3px; }
+  .eyebrow-div { width: 32px; height: 1px; background: var(--border-light); }
+  .eyebrow-ind { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: clamp(42px, 6vw, 80px); font-weight: 700; line-height: 1.0; letter-spacing: -0.03em; color: var(--white); margin-bottom: 28px; max-width: 820px; animation: fadeUp 0.7s ease 0.1s both; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 18px; font-weight: 300; color: var(--muted); max-width: 560px; line-height: 1.65; margin-bottom: 56px; animation: fadeUp 0.7s ease 0.2s both; }
+  .hero-meta { display: flex; gap: 0; border-top: 1px solid var(--border); padding-top: 40px; animation: fadeUp 0.7s ease 0.3s both; }
+  .meta-i { padding-right: 48px; margin-right: 48px; border-right: 1px solid var(--border); }
+  .meta-i:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+  .ml { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .mv { font-size: 14px; font-weight: 500; color: var(--text); }
+
+  .stats-strip { background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .ss-inner { max-width: 1120px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .st { padding: 48px 0; border-right: 1px solid var(--border); padding-right: 48px; }
+  .st:not(:first-child) { padding-left: 48px; }
+  .st:last-child { border-right: none; }
+  .sn { font-size: clamp(36px,4vw,52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--accent); margin-bottom: 10px; font-family: 'IBM Plex Mono', monospace; }
+  .sl { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  section { padding: 96px 0; }
+  .si { max-width: 1120px; margin: 0 auto; padding: 0 48px; }
+  .sec-lbl { display: flex; align-items: center; gap: 12px; margin-bottom: 48px; }
+  .sec-line { width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+  .sec-txt { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  h2 { font-size: clamp(28px,3.5vw,42px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: var(--white); margin-bottom: 24px; }
+  .sec-body { font-size: 16px; color: #aaa; line-height: 1.8; font-weight: 300; max-width: 680px; }
+  .sec-body p+p { margin-top: 20px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .dark-bg { background: var(--dark); }
+
+  .problems { margin-top: 48px; }
+  .prob { padding: 28px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 32px 1fr; gap: 20px; }
+  .prob:first-child { border-top: 1px solid var(--border); }
+  .pnum { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: var(--accent); padding-top: 3px; }
+  .pt h4 { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .pt p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  .modules { display: flex; flex-direction: column; gap: 2px; margin-top: 64px; }
+  .module { background: var(--card); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+  .mh { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; padding: 28px 32px; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .mh:hover { background: rgba(255,255,255,0.02); }
+  .mnum { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-dim); border: 1px solid rgba(245,166,35,0.2); padding: 4px 10px; border-radius: 2px; }
+  .mtitle { font-size: 17px; font-weight: 600; color: var(--white); }
+  .marrow { color: var(--muted); transition: transform 0.3s; font-size: 18px; }
+  .module.open .marrow { transform: rotate(180deg); }
+  .mb { display: none; padding: 0 32px 32px; border-top: 1px solid var(--border); }
+  .module.open .mb { display: block; }
+  .mb p { font-size: 15px; color: #aaa; line-height: 1.8; padding-top: 24px; }
+  .mb p+p { margin-top: 16px; }
+  .mfeats { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .feat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .feat::before { content:''; display:block; width:5px; height:5px; background:var(--accent); border-radius:50%; flex-shrink:0; }
+
+  .impact-bg { background: var(--dark); }
+  .igrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 64px; }
+  .ic { background: var(--card); border: 1px solid var(--border); padding: 36px; position: relative; }
+  .ic::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--accent) 0%, transparent 100%); }
+  .ic-mod { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .ic-num { font-family:'IBM Plex Mono',monospace; font-size:44px; font-weight:700; letter-spacing:-0.04em; color:var(--white); line-height:1; margin-bottom:10px; }
+  .ic-num sup { font-size:26px; }
+  .ic-desc { font-size:13px; color:var(--muted); line-height:1.6; }
+  .ic.wide { grid-column: span 2; }
+
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 48px; }
+  .ai-feat { background: var(--card); border: 1px solid var(--border); padding: 32px; }
+  .ai-feat-icon { width: 36px; height: 36px; background: var(--accent-dim); border: 1px solid rgba(245,166,35,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 16px; }
+  .ai-feat h4 { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+  .ai-feat p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  .cta-section { background: var(--card); border-top: 1px solid var(--border); padding: 96px 0; }
+  .cta-inner { max-width: 1120px; margin: 0 auto; padding: 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .cta-h { font-size: clamp(28px,3.5vw,44px); font-weight:700; letter-spacing:-0.025em; line-height:1.15; color:var(--white); margin-bottom:16px; }
+  .cta-sub { font-size:15px; color:var(--muted); line-height:1.7; }
+  .cta-form { display:flex; flex-direction:column; gap:12px; }
+  .cta-input { background:var(--dark); border:1px solid var(--border); color:var(--text); padding:14px 16px; font-family:inherit; font-size:14px; border-radius:2px; outline:none; transition:border-color 0.2s; }
+  .cta-input:focus { border-color:var(--accent); }
+  .cta-input::placeholder { color:#444; }
+  .cta-btn { background:var(--accent); color:var(--black); border:none; padding:14px 24px; font-family:inherit; font-size:14px; font-weight:600; cursor:pointer; border-radius:2px; transition:opacity 0.2s; }
+  .cta-btn:hover { opacity:0.88; }
+
+  footer { padding:32px 48px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:13px; }
+  .footer-logo { font-weight:600; color:var(--white); font-size:15px; }
+  .footer-logo span { color:var(--accent); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:900px){
+    nav{padding:0 24px;}
+    .hero-inner,.si{padding:60px 24px;}
+    .ss-inner{padding:0 24px; grid-template-columns:repeat(2,1fr);}
+    .st{border-right:none; border-bottom:1px solid var(--border); padding:32px 0;}
+    .st:not(:first-child){padding-left:0;}
+    .two-col{grid-template-columns:1fr; gap:40px;}
+    .igrid{grid-template-columns:1fr;}
+    .ic.wide{grid-column:span 1;}
+    .ai-grid{grid-template-columns:1fr;}
+    .cta-inner{grid-template-columns:1fr; gap:40px;}
+    .mfeats{grid-template-columns:1fr;}
+    footer{flex-direction:column; gap:12px; text-align:center; padding:24px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Tech<span>Quarter</span></a>
+  <div class="nav-right">
+    <span class="nav-tag">Case Study</span>
+    <a href="#contact" class="nav-cta">Get In Touch</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-tag">Case Study</span>
+      <div class="eyebrow-div"></div>
+      <span class="eyebrow-ind">Residential Solar · California &amp; Texas</span>
+    </div>
+    <h1>Top U.S. Solar Installer<br>Runs <em>Smarter</em> with AI</h1>
+    <p class="hero-sub">A custom three-module platform — Sales Portal, Automations, and AI Ops — built for one of the largest residential solar installers in California and Texas.</p>
+    <div class="hero-meta">
+      <div class="meta-i"><div class="ml">Industry</div><div class="mv">Residential Solar Installation</div></div>
+      <div class="meta-i"><div class="ml">Location</div><div class="mv">California &amp; Texas</div></div>
+      <div class="meta-i"><div class="ml">Scale</div><div class="mv">Tens of thousands of homeowners</div></div>
+      <div class="meta-i"><div class="ml">Scope</div><div class="mv">3 Integrated Modules</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="ss-inner">
+    <div class="st"><div class="sn">580+</div><div class="sl">Active users across 100+ dealer companies</div></div>
+    <div class="st"><div class="sn">400+</div><div class="sl">Utility applications automated — 0% manual work previously</div></div>
+    <div class="st"><div class="sn">5,000+</div><div class="sl">Leads managed since becoming sole source of truth</div></div>
+    <div class="st"><div class="sn">700+</div><div class="sl">Active jobs monitored in real time by AI</div></div>
+  </div>
+</div>
+
+<section class="dark-bg">
+  <div class="si">
+    <div class="two-col">
+      <div>
+        <div class="sec-lbl"><div class="sec-line"></div><span class="sec-txt">The Challenge</span></div>
+        <h2>Three compounding problems at scale</h2>
+        <div class="sec-body"><p>As the company grew across California and Texas, operational friction compounded. A fragmented dealer network, manual utility workflows, and scattered project data were creating gaps that would only widen at scale.</p></div>
+      </div>
+      <div>
+        <div class="problems">
+          <div class="prob"><span class="pnum">01</span><div class="pt"><h4>Sales was fragmented across dozens of teams</h4><p>Dealers relied on a third-party CRM to manage leads and users. When licenses were revoked, there was no centralized platform — creating visibility gaps, pipeline blind spots, and no clean handoff from lead to job.</p></div></div>
+          <div class="prob"><span class="pnum">02</span><div class="pt"><h4>Utility applications were burning hours, manually</h4><p>Every interconnection application required Ops Managers to manually pull job data from multiple systems and step through each utility provider's platform one job at a time. At their volume, this was a significant and growing source of lost time.</p></div></div>
+          <div class="prob"><span class="pnum">03</span><div class="pt"><h4>Project Managers lacked a fast way to surface risks</h4><p>PMs tracked dozens of active jobs simultaneously with data scattered across tables in their CRM. There was no intelligent way to surface which jobs needed immediate attention or flag risks early.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="si">
+    <div class="sec-lbl"><div class="sec-line"></div><span class="sec-txt">What We Built</span></div>
+    <div class="two-col">
+      <div><h2>A unified platform with three integrated modules</h2><div class="sec-body"><p>We designed and built a custom internal platform addressing each challenge directly. The Sales Portal became the operational backbone. Automations eliminated manual utility workflows. And AI Ops transformed how Project Managers work with live job data.</p></div></div>
+      <div></div>
+    </div>
+    <div class="modules">
+      <div class="module open">
+        <div class="mh" onclick="this.parentElement.classList.toggle('open')"><span class="mnum">01</span><span class="mtitle">Sales Portal — Structured Operations for a Distributed Dealer Network</span><span class="marrow">⌃</span></div>
+        <div class="mb">
+          <p>The Sales Portal is the operational backbone now used by over 100 dealer companies, 150+ teams, and 580+ users. Since early 2026, it has been the sole source of truth for all lead and job management — replacing a third-party CRM that was decommissioned across the network.</p>
+          <p>The platform supports a full role hierarchy with precisely scoped permissions at every level. Onboarding is a two-step flow: platform admins invite dealer companies; company owners then manage their own users, teams, and roles. A real-time dashboard surfaces lead stats, trends, payment data, and a leaderboard of top-performing reps. A Customer Verification step sends homeowners an SMS to confirm the identity of their sales rep — a fraud-prevention layer built into the core flow.</p>
+          <p>Since becoming the sole source of truth: <strong>5,000+ leads</strong> and <strong>1,100+ jobs</strong> managed. Over <strong>8,000 leads</strong> and <strong>2,400+ jobs</strong> tracked across the full system lifetime.</p>
+          <div class="mfeats">
+            <span class="feat">Full role-based permission system</span><span class="feat">SMS-based onboarding &amp; OTP auth</span>
+            <span class="feat">Lead lifecycle management</span><span class="feat">Real-time pipeline dashboard</span>
+            <span class="feat">Customer Verification (fraud prevention)</span><span class="feat">Payments data &amp; rep leaderboard</span>
+          </div>
+        </div>
+      </div>
+      <div class="module">
+        <div class="mh" onclick="this.parentElement.classList.toggle('open')"><span class="mnum">02</span><span class="mtitle">Automations — Eliminating Manual Utility Applications</span><span class="marrow">⌃</span></div>
+        <div class="mb">
+          <p>Before this module, every interconnection application was submitted manually — an Ops Manager would pull job data from multiple systems and work through each utility's platform step by step, for every single job. That process is now automated for three of the four providers in the network.</p>
+          <p>An Ops Manager triggers an automation from within the portal. The system fetches the relevant job data, navigates the external utility platform, and completes the application automatically. If data is missing or an error is encountered, the system surfaces exactly where and why. The PM resolves it and restarts — the automation picks up from that point. Real-time status tracking and a full audit log give the team complete visibility throughout.</p>
+          <p><strong>400+ applications processed.</strong> Three utility providers automated — each with a distinct underlying flow. Each automated submission takes approximately <strong>90 seconds</strong>.</p>
+          <div class="mfeats">
+            <span class="feat">3 utility providers automated</span><span class="feat">~90 sec per submission</span>
+            <span class="feat">Real-time status &amp; audit log</span><span class="feat">Intelligent error surfacing</span>
+            <span class="feat">400+ applications processed</span><span class="feat">100% manual previously</span>
+          </div>
+        </div>
+      </div>
+      <div class="module">
+        <div class="mh" onclick="this.parentElement.classList.toggle('open')"><span class="mnum">03</span><span class="mtitle">AI Ops — Intelligence Layer for Project Management</span><span class="marrow">⌃</span></div>
+        <div class="mb">
+          <p>AI Ops is an AI-powered analysis and chat suite built directly into the portal. It continuously monitors active jobs for data changes and automatically runs analysis in the background — so by the time a PM opens a job, the insights are already there.</p>
+          <p>Each analysis is driven by configurable scenarios — structured instructions that define what role the AI takes and what to look for. The client's team owns these scenarios fully: they can create, refine, and test them against real job data before deploying. Currently <strong>six scenarios</strong> are active and running. On top of automated analysis, a conversational chat layer lets PMs query any job naturally — risks, blockers, history, colleague queues — with the AI responding from live job data.</p>
+          <p><strong>700+ active jobs</strong> monitored in real time. <strong>400+ jobs analyzed automatically</strong> in a typical week — zero manual triggers required.</p>
+          <div class="mfeats">
+            <span class="feat">Auto-analysis on job changes</span><span class="feat">6 configurable scenarios</span>
+            <span class="feat">700+ active jobs monitored</span><span class="feat">400+ analyses per week</span>
+            <span class="feat">Conversational job chat</span><span class="feat">Client-owned scenario management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="impact-bg">
+  <div class="si">
+    <div class="sec-lbl"><div class="sec-line"></div><span class="sec-txt">Measurable Impact</span></div>
+    <h2>Results across all three modules</h2>
+    <div class="igrid">
+      <div class="ic"><div class="ic-mod">Sales Portal</div><div class="ic-num">580<sup>+</sup></div><div class="ic-desc">Users across 100+ companies and 150+ teams — all managed through a single platform</div></div>
+      <div class="ic"><div class="ic-mod">Sales Portal</div><div class="ic-num">1,100<sup>+</sup></div><div class="ic-desc">Jobs converted since the portal became the sole operational source of truth</div></div>
+      <div class="ic"><div class="ic-mod">Sales Portal</div><div class="ic-num">8,000<sup>+</sup></div><div class="ic-desc">Total leads tracked across the full system lifetime, with full pipeline visibility</div></div>
+      <div class="ic"><div class="ic-mod">Automations</div><div class="ic-num">400<sup>+</sup></div><div class="ic-desc">Utility applications automated — replacing a process that was 100% manual</div></div>
+      <div class="ic"><div class="ic-mod">Automations</div><div class="ic-num">~90<sup>sec</sup></div><div class="ic-desc">Per automated submission — down from unpredictable, multi-step manual effort per job</div></div>
+      <div class="ic"><div class="ic-mod">Automations</div><div class="ic-num">3/4</div><div class="ic-desc">Utility providers automated — SCE, PG&amp;E, SDG&amp;E — each with a distinct flow built</div></div>
+      <div class="ic wide"><div class="ic-mod">AI Ops</div><div class="ic-num">400<sup>+</sup></div><div class="ic-desc">Jobs analyzed automatically each week — triggered by data changes, zero manual intervention required</div></div>
+      <div class="ic"><div class="ic-mod">AI Ops</div><div class="ic-num">700<sup>+</sup></div><div class="ic-desc">Active jobs monitored in real time across In Progress and On Hold statuses</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="si">
+    <div class="sec-lbl"><div class="sec-line"></div><span class="sec-txt">The Bigger Picture</span></div>
+    <div class="two-col">
+      <div>
+        <h2>Why this matters for service businesses</h2>
+        <div class="sec-body">
+          <p>This client's situation is not unique. Any service company managing a high volume of complex, multi-stakeholder projects — where data lives in one system, work happens in another, and people need fast, accurate context to make good decisions — faces the same structural problem.</p>
+          <p>The insight behind this platform is that AI doesn't need to replace the judgment of experienced professionals. It needs to reduce the time they spend gathering context, so that judgment can be applied sooner and more consistently.</p>
+        </div>
+      </div>
+      <div>
+        <div class="ai-grid">
+          <div class="ai-feat"><div class="ai-feat-icon">⚡</div><h4>For Project Managers</h4><p>Less time in records, more time acting on issues the AI has already surfaced and prioritized.</p></div>
+          <div class="ai-feat"><div class="ai-feat-icon">⚙️</div><h4>For Operations</h4><p>Applications that used to consume hours now run in the background with full audit trails.</p></div>
+          <div class="ai-feat"><div class="ai-feat-icon">📊</div><h4>For Sales Leadership</h4><p>Real visibility into a distributed dealer network — without chasing down reports.</p></div>
+          <div class="ai-feat"><div class="ai-feat-icon">🛡️</div><h4>For Compliance</h4><p>Customer verification and audit logs built into every workflow from day one.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-h">Ready to build intelligent operational infrastructure?</h2>
+      <p class="cta-sub">We design and build custom platforms for service businesses managing complex, high-volume operations. Tell us your biggest challenge.</p>
+    </div>
+    <div class="cta-form">
+      <input class="cta-input" type="text" placeholder="Full Name" />
+      <input class="cta-input" type="email" placeholder="Email Address" />
+      <input class="cta-input" type="text" placeholder="What's your biggest operational challenge?" />
+      <button class="cta-btn">Get In Touch →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Tech<span>Quarter</span></span>
+  <span>TechQuarter © 2026 · All rights reserved</span>
+</footer>
+</body>
+</html>
