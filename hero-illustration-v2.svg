@@ -1,0 +1,180 @@
+<svg viewBox="0 0 540 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+  <title>TechQuarter — Solar Ops Hero Illustration (v2)</title>
+  <desc>Constellation diagram with orbiting nodes, circuit lines, sun core, and animated data packets. Used as hero section right-column illustration.</desc>
+  
+  <defs>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbae17" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#f6921e" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#f6921e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbae17" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#f6921e" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fbae17" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fbae17" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#fbae17" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f6921e" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#f6921e" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#f6921e" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Central sun glow -->
+  <circle cx="270" cy="240" r="160" fill="url(#sunGlow)"/>
+
+  <!-- Sun burst rays — thin long lines -->
+  <g opacity="0.35" stroke="#fbae17" stroke-width="0.8">
+    <line x1="270" y1="240" x2="270" y2="30"/>
+    <line x1="270" y1="240" x2="270" y2="450"/>
+    <line x1="270" y1="240" x2="60" y2="240"/>
+    <line x1="270" y1="240" x2="480" y2="240"/>
+    <line x1="270" y1="240" x2="122" y2="92"/>
+    <line x1="270" y1="240" x2="418" y2="388"/>
+    <line x1="270" y1="240" x2="418" y2="92"/>
+    <line x1="270" y1="240" x2="122" y2="388"/>
+    <line x1="270" y1="240" x2="176" y2="48"/>
+    <line x1="270" y1="240" x2="364" y2="432"/>
+    <line x1="270" y1="240" x2="462" y2="144"/>
+    <line x1="270" y1="240" x2="78" y2="336"/>
+    <line x1="270" y1="240" x2="462" y2="336"/>
+    <line x1="270" y1="240" x2="78" y2="144"/>
+    <line x1="270" y1="240" x2="364" y2="48"/>
+    <line x1="270" y1="240" x2="176" y2="432"/>
+  </g>
+
+  <!-- Concentric orbit rings -->
+  <circle cx="270" cy="240" r="90" fill="none" stroke="#fbae17" stroke-width="0.6" stroke-dasharray="4 8" opacity="0.3"/>
+  <circle cx="270" cy="240" r="140" fill="none" stroke="#f6921e" stroke-width="0.5" stroke-dasharray="3 12" opacity="0.2"/>
+  <circle cx="270" cy="240" r="195" fill="none" stroke="#fbae17" stroke-width="0.4" stroke-dasharray="2 16" opacity="0.15"/>
+
+  <!-- Sun core -->
+  <circle cx="270" cy="240" r="36" fill="none" stroke="#fbae17" stroke-width="1.2" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="270" cy="240" r="22" fill="none" stroke="#ffc132" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="270" cy="240" r="10" fill="#fbae17" opacity="0.9" filter="url(#softglow)"/>
+
+  <!-- Circuit grid lines — horizontal -->
+  <g stroke="rgba(251,174,23,0.1)" stroke-width="0.5">
+    <line x1="0" y1="120" x2="540" y2="120"/>
+    <line x1="0" y1="180" x2="540" y2="180"/>
+    <line x1="0" y1="300" x2="540" y2="300"/>
+    <line x1="0" y1="360" x2="540" y2="360"/>
+    <line x1="0" y1="420" x2="540" y2="420"/>
+    <line x1="90" y1="0" x2="90" y2="600"/>
+    <line x1="180" y1="0" x2="180" y2="600"/>
+    <line x1="360" y1="0" x2="360" y2="600"/>
+    <line x1="450" y1="0" x2="450" y2="600"/>
+  </g>
+
+  <!-- Orbiting nodes on rings -->
+  <!-- Ring 1 nodes -->
+  <g filter="url(#glow)">
+    <circle cx="270" cy="150" r="4.5" fill="#fbae17" opacity="0.9"/>
+    <circle cx="356" cy="266" r="3.5" fill="#ffc132" opacity="0.85"/>
+    <circle cx="184" cy="214" r="3.5" fill="#f6921e" opacity="0.8"/>
+    <circle cx="310" cy="322" r="4" fill="#fbae17" opacity="0.75"/>
+  </g>
+
+  <!-- Ring 2 nodes -->
+  <g filter="url(#glow)">
+    <circle cx="130" cy="240" r="5" fill="#fbae17" opacity="0.7"/>
+    <circle cx="410" cy="180" r="4" fill="#f6921e" opacity="0.65"/>
+    <circle cx="380" cy="340" r="3.5" fill="#ffc132" opacity="0.6"/>
+    <circle cx="160" cy="340" r="4" fill="#fbae17" opacity="0.6"/>
+  </g>
+
+  <!-- Connector lines between nodes (circuit style) -->
+  <g stroke="#fbae17" stroke-width="0.7" opacity="0.3" fill="none">
+    <polyline points="270,150 270,120 90,120 90,240 130,240"/>
+    <polyline points="356,266 360,300 450,300 450,180 410,180"/>
+    <polyline points="184,214 180,180 90,180"/>
+    <polyline points="310,322 360,360 380,340"/>
+    <polyline points="130,240 90,240"/>
+    <polyline points="160,340 90,360"/>
+  </g>
+
+  <!-- Corner node dots on grid intersections -->
+  <g fill="rgba(251,174,23,0.35)">
+    <circle cx="90" cy="120" r="2.5"/>
+    <circle cx="180" cy="120" r="2"/>
+    <circle cx="360" cy="120" r="2.5"/>
+    <circle cx="450" cy="120" r="2"/>
+    <circle cx="90" cy="180" r="2"/>
+    <circle cx="180" cy="180" r="2.5"/>
+    <circle cx="360" cy="180" r="2"/>
+    <circle cx="450" cy="180" r="2.5"/>
+    <circle cx="90" cy="300" r="2"/>
+    <circle cx="360" cy="300" r="2.5"/>
+    <circle cx="450" cy="300" r="2"/>
+    <circle cx="90" cy="360" r="2.5"/>
+    <circle cx="180" cy="360" r="2"/>
+    <circle cx="360" cy="360" r="2"/>
+    <circle cx="450" cy="360" r="2.5"/>
+    <circle cx="90" cy="420" r="2"/>
+    <circle cx="180" cy="420" r="2.5"/>
+    <circle cx="360" cy="420" r="2"/>
+    <circle cx="450" cy="420" r="2.5"/>
+  </g>
+
+  <!-- Floating mini UI cards — right cluster -->
+  <!-- Card 1: Jobs monitored -->
+  <g transform="translate(385,80)" opacity="0.82">
+    <rect width="120" height="52" rx="4" fill="#141420" stroke="#fbae17" stroke-width="0.8" stroke-opacity="0.4"/>
+    <rect width="120" height="2" rx="1" fill="#fbae17" opacity="0.6"/>
+    <text x="10" y="18" font-family="IBM Plex Mono" font-size="8" fill="#fbae17" opacity="0.7">AI OPS</text>
+    <text x="10" y="34" font-family="IBM Plex Mono" font-size="18" fill="white" font-weight="bold">700+</text>
+    <text x="10" y="46" font-family="IBM Plex Sans" font-size="7" fill="#666">Active jobs monitored</text>
+    <circle cx="108" cy="12" r="3" fill="#28b473" opacity="0.9"/>
+  </g>
+
+  <!-- Card 2: Applications automated -->
+  <g transform="translate(60,310)" opacity="0.78">
+    <rect width="130" height="52" rx="4" fill="#141420" stroke="#60a5fa" stroke-width="0.8" stroke-opacity="0.4"/>
+    <rect width="130" height="2" rx="1" fill="#60a5fa" opacity="0.6"/>
+    <text x="10" y="18" font-family="IBM Plex Mono" font-size="8" fill="#60a5fa" opacity="0.7">AUTOMATIONS</text>
+    <text x="10" y="34" font-family="IBM Plex Mono" font-size="18" fill="white" font-weight="bold">400+</text>
+    <text x="10" y="46" font-family="IBM Plex Sans" font-size="7" fill="#666">Apps submitted</text>
+  </g>
+
+  <!-- Card 3: Users -->
+  <g transform="translate(370,390)" opacity="0.74">
+    <rect width="130" height="52" rx="4" fill="#141420" stroke="#a78bfa" stroke-width="0.8" stroke-opacity="0.4"/>
+    <rect width="130" height="2" rx="1" fill="#a78bfa" opacity="0.6"/>
+    <text x="10" y="18" font-family="IBM Plex Mono" font-size="8" fill="#a78bfa" opacity="0.7">SALES PORTAL</text>
+    <text x="10" y="34" font-family="IBM Plex Mono" font-size="18" fill="white" font-weight="bold">580+</text>
+    <text x="10" y="46" font-family="IBM Plex Sans" font-size="7" fill="#666">Active users</text>
+  </g>
+
+  <!-- Animated pulse rings on sun core -->
+  <circle cx="270" cy="240" r="48" fill="none" stroke="#fbae17" stroke-width="0.8" opacity="0.4">
+    <animate attributeName="r" values="48;80;48" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.4;0;0.4" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="270" cy="240" r="48" fill="none" stroke="#fbae17" stroke-width="0.6" opacity="0.3">
+    <animate attributeName="r" values="48;100;48" dur="4s" begin="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.3;0;0.3" dur="4s" begin="1.5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Flowing data packets along lines -->
+  <circle r="2.5" fill="#fbae17" opacity="0.9" filter="url(#glow)">
+    <animateMotion dur="6s" repeatCount="indefinite" path="M270,240 L270,120 L90,120 L90,240"/>
+  </circle>
+  <circle r="2" fill="#ffc132" opacity="0.8" filter="url(#glow)">
+    <animateMotion dur="5s" begin="2s" repeatCount="indefinite" path="M270,240 L450,180 L450,300 L360,300"/>
+  </circle>
+  <circle r="1.8" fill="#f6921e" opacity="0.7" filter="url(#glow)">
+    <animateMotion dur="7s" begin="1s" repeatCount="indefinite" path="M270,240 L180,120 L90,180 L90,360 L180,360"/>
+  </circle>
+</svg>
